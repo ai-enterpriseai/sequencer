@@ -5,21 +5,27 @@ import asyncio
 import logging
 from pathlib import Path
 from typing import List, Dict, Optional
-from dataclasses import dataclass
+from pydantic import BaseModel, computed_field
+from datetime import datetime, timedelta
 
 from .config import Settings, APIConfig, RunnerConfig, get_settings
 from .providers import get_provider, LLMError
 from .reader import read_sequence, PromptSection
 
-@dataclass
-class RunResult:
+class RunResult(BaseModel):
     """Result of a single run"""
     model: str
     title: str
     content: str
     response: str
     error: Optional[str] = None
+    start_time: datetime
+    end_time: datetime
 
+    @computed_field
+    def duration_seconds(self) -> timedelta:
+        return self.end_time - self.start_time
+    
 class SequenceRunner:
     """Handles running prompt sequences through LLM providers"""
     
@@ -49,14 +55,20 @@ class SequenceRunner:
                 try:
                     self.logger.info(f"Processing: {section.title}")
                     messages.append({"role": "user", "content": section.content})
+                    
+                    start_time = datetime.now()
                     response = await provider.generate(messages)
+                    end_time = datetime.now()
+                    
                     messages.append({"role": "assistant", "content": response})
                     
                     results.append(RunResult(
                         model=model,
                         title=section.title,
                         content=section.content,
-                        response=response
+                        response=response,
+                        start_time=start_time,
+                        end_time=end_time
                     ))
                     
                 except LLMError as e:
@@ -66,7 +78,9 @@ class SequenceRunner:
                         title=section.title,
                         content=section.content,
                         response="",
-                        error=str(e)
+                        error=str(e),
+                        start_time=start_time,
+                        end_time=datetime.now()
                     ))
             
             return results

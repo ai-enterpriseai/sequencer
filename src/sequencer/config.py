@@ -6,10 +6,11 @@ from pydantic import BaseModel, Field, SecretStr, AnyHttpUrl
 from pydantic_settings import BaseSettings
 
 ModelType = Literal[
-    "gpt-4o-2024-08-06",
-    "claude-3-5-sonnet-20241022",
-    "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
-    "llama3.1-70b",
+    "gpt-4o-2024-08-06", # OpenAI 
+    "claude-3-5-sonnet-20241022", # Anthopic 
+    "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo", # Together.ai
+    "Meta-Llama-3.1-405B-Instruct", # SambaNova
+    "llama-3.3-70b", # Cerebras
     # "o1-2024-12-17",
     # "o1-preview-2024-09-12",
     # "o1-mini-2024-09-12",

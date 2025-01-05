@@ -1,12 +1,11 @@
 # Python-generated files
 __pycache__/
 *.py[oc]
-.obsidian
+.obsidian/
+.venv/
+kit/
 results/
 build/
 dist/
 wheels/
 *.egg-info
-
-# Virtual environments
-.venv

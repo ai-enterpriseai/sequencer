@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import AsyncIterator, List
 
 from .runner import RunResult, SequenceRunner
+from .runner import run
 from .writer import write_results
 from .reader import read_sequence
 
@@ -38,10 +39,12 @@ def parse_args() -> argparse.Namespace:
         nargs="+",
         default=[
             "gpt-4o-2024-08-06", # OpenAI 
-            "claude-3-5-sonnet-20241022", # Anthopic 
-            "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo", # Together.ai
-            "Meta-Llama-3.1-405B-Instruct", # SambaNova
-            "llama-3.3-70b", # Cerebras
+            # "gpt-4o-mini-2024-07-18", # OpenAI 
+            # "gpt-3.5-turbo-0125", # OpenAI 
+            # "claude-3-5-sonnet-20241022", # Anthopic 
+            # "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo", # Together.ai
+            # "Meta-Llama-3.1-405B-Instruct", # SambaNova
+            # "llama-3.3-70b", # Cerebras
         ],
         help="Models to run (space-separated)"
     )
@@ -101,47 +104,12 @@ What is artificial intelligence?
     
     return sequence_path
 
-async def run_with_progress(
-    sequence_file: Path,
-    models: List[str],
-    num_runs: int
-) -> AsyncIterator[List[RunResult]]:
-    """Run sequence and yield results as they complete"""
-    runner = SequenceRunner()
-    sections = read_sequence(sequence_file)
-    
-    tasks = {
-        asyncio.create_task(
-            runner._run_model(model, sections),
-            name=f"{model}_run_{i}"
-        )
-        for model in models
-        for i in range(num_runs+1)
-    }
-    
-    # Process tasks as they complete
-    while tasks:
-        done, _ = await asyncio.wait(
-            tasks, 
-            return_when=asyncio.FIRST_COMPLETED
-        )
-        
-        for task in done:
-            tasks.remove(task)
-            try:
-                results = await task
-                if results:  # Only yield if we have results
-                    yield results
-            except Exception as e:
-                logger.error(f"Task {task.get_name()} failed: {str(e)}")
-                # Continue with remaining tasks instead of raising
-                continue
-
 async def main() -> None:
     """Main entry point"""
     args = parse_args()
     
     try:
+        runner = SequenceRunner()
         sequence_file = get_sequence_path(args.sequence_file)
         
         logger.info(f"Processing sequence file: {sequence_file}")
@@ -150,7 +118,7 @@ async def main() -> None:
         start_time = datetime.now()
         completed_results = []
         
-        async for results in run_with_progress(sequence_file, args.models, args.num_runs):
+        async for results in runner.run_sequence(sequence_file, args.models, args.num_runs):
             completed_results.extend(results)
             write_results(results, args.output_dir)
            

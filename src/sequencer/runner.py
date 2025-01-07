@@ -4,7 +4,7 @@ Runner module for executing prompt sequences across LLM providers.
 import asyncio
 import logging
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, AsyncIterator
 from pydantic import BaseModel, computed_field
 from datetime import datetime, timedelta
 
@@ -90,34 +90,41 @@ class SequenceRunner:
             raise
     
     async def run_sequence(
-        self, 
-        sequence_file: str | Path,
+        self,
+        sequence_file: Path,
         models: List[str],
-        num_runs: int = 1
-    ) -> List[RunResult]:
-        """Run sequence through specified models"""
-        if not models:
-            raise ValueError("No models provided")
-        if num_runs < 1:
-            raise ValueError("num_runs must be positive")
-            
+        num_runs: int
+    ) -> AsyncIterator[List[RunResult]]:
+        """Run sequence and yield results as they complete"""
+        runner = SequenceRunner()
         sections = read_sequence(sequence_file)
-        tasks = [
-            self._run_model(model, sections)
+        
+        tasks = {
+            asyncio.create_task(
+                runner._run_model(model, sections),
+                name=f"{model}_run_{i}"
+            )
             for model in models
-            for _ in range(num_runs)
-        ]
+            for i in range(num_runs)
+        }
         
-        results = []
-        for completed in asyncio.as_completed(tasks):
-            try:
-                run_results = await completed
-                results.extend(run_results)
-            except Exception as e:
-                self.logger.error(f"Task failed: {str(e)}")
-                raise
-        
-        return results
+        # Process tasks as they complete
+        while tasks:
+            done, _ = await asyncio.wait(
+                tasks, 
+                return_when=asyncio.FIRST_COMPLETED
+            )
+            
+            for task in done:
+                tasks.remove(task)
+                try:
+                    results = await task
+                    if results:  # Only yield if we have results
+                        yield results
+                except Exception as e:
+                    self.logger.error(f"Task {task.get_name()} failed: {str(e)}")
+                    # Continue with remaining tasks instead of raising
+                    continue
 
 async def run(
     sequence_file: str | Path,
@@ -126,4 +133,7 @@ async def run(
 ) -> List[RunResult]:
     """Run prompts through specified models"""
     runner = SequenceRunner()
-    return await runner.run_sequence(sequence_file, models, num_runs)
+    all_results = []
+    async for results in runner.run_sequence(sequence_file, models, num_runs):
+        all_results.extend(results)
+    return all_results

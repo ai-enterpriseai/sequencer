@@ -39,6 +39,17 @@ class SequenceRunner:
             raise ValueError("No sections provided")
         return [{"role": "system", "content": sections[0].content}]
 
+    def _replace_placeholders(self, text: str, **kwargs) -> str:
+        """
+        Replace placeholders in `text` with the corresponding values in kwargs.
+        Placeholders look like {key}.
+        If a given placeholder isn't provided in kwargs, it won't be replaced.
+        """
+        for key, value in kwargs.items():
+            if value is not None:
+                text = text.replace(f"{{{key}}}", str(value))
+        return text
+
     async def _run_model(self, model: str, sections: List[PromptSection]) -> List[RunResult]:
         """Run sequence through a single model"""
         if not sections:
@@ -93,11 +104,19 @@ class SequenceRunner:
         self,
         sequence_file: Path,
         models: List[str],
-        num_runs: int
+        num_runs: int,
+        **kwargs
     ) -> AsyncIterator[List[RunResult]]:
         """Run sequence and yield results as they complete"""
         runner = SequenceRunner()
         sections = read_sequence(sequence_file)
+
+        # Replace placeholders in each section
+        updated_sections = []
+        for section in sections:
+            replaced_content = self._replace_placeholders(section.content, **kwargs)
+            section.content = replaced_content
+            updated_sections.append(section)
         
         tasks = {
             asyncio.create_task(

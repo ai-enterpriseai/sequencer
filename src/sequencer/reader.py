@@ -88,4 +88,3 @@ def read_sequence(file_path: str | Path) -> List[PromptSection]:
     reader = SequenceReader(file_path)
     content = reader.read_content()
     return reader.parse_sections(content)
-

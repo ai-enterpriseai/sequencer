@@ -5,11 +5,14 @@ import sys
 import asyncio
 import logging
 import argparse
+from datetime import datetime, timedelta
 from pathlib import Path
+from typing import AsyncIterator, List
 
-from .config import ModelType
+from .runner import RunResult, SequenceRunner
 from .runner import run
 from .writer import write_results
+from .reader import read_sequence
 
 # Configure logging
 logging.basicConfig(
@@ -35,16 +38,20 @@ def parse_args() -> argparse.Namespace:
         "-m", "--models",
         nargs="+",
         default=[
-            "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
-            "claude-3-5-sonnet-20241022",
-            "gpt-4o-2024-08-06",
+            "gpt-4o-2024-08-06", # OpenAI 
+            # "gpt-4o-mini-2024-07-18", # OpenAI 
+            # "gpt-3.5-turbo-0125", # OpenAI 
+            # "claude-3-5-sonnet-20241022", # Anthopic 
+            # "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo", # Together.ai
+            # "Meta-Llama-3.1-405B-Instruct", # SambaNova
+            # "llama-3.3-70b", # Cerebras
         ],
         help="Models to run (space-separated)"
     )
     parser.add_argument(
         "-n", "--num-runs",
         type=int,
-        default=1,
+        default=1, # if >1, and rate limit is reached, can lead to multiple files written with the same content but diff timestamps
         help="Number of runs per model"
     )
     parser.add_argument(
@@ -102,16 +109,37 @@ async def main() -> None:
     args = parse_args()
     
     try:
-        # Get sequence file path
+        runner = SequenceRunner()
         sequence_file = get_sequence_path(args.sequence_file)
         
         logger.info(f"Processing sequence file: {sequence_file}")
         logger.info(f"Using models: {', '.join(args.models)}")
         
-        results = await run(sequence_file, args.models, args.num_runs)
-        write_results(results, args.output_dir)
+        start_time = datetime.now()
+        completed_results = []
         
-        logger.info("Processing complete")
+        async for results in runner.run_sequence(sequence_file, args.models, args.num_runs):
+            completed_results.extend(results)
+            write_results(results, args.output_dir)
+           
+            # Log progress for each completed result
+            for result in results:
+                status = "Completed" if not result.error else "Failed"
+                logger.info(
+                    f"{status} {result.model} - {result.title} - "
+                    f"duration: {result.duration_seconds.total_seconds():.1f}s"
+                    + (f" (Error: {result.error})" if result.error else "")
+                )
+            
+        # Log total execution time and success rate
+        total_duration = datetime.now() - start_time
+        total_attempts = len(args.models) * args.num_runs * (len(read_sequence(sequence_file)) - 1)
+        success_count = len([r for r in completed_results if not r.error])
+        
+        logger.info(
+            f"Processing complete in {total_duration.total_seconds() / 60:.0f}:{total_duration.total_seconds() % 60:.1f}\n"
+            f"Success rate: {success_count}/{total_attempts} ({success_count/total_attempts*100:.1f}%)"
+        )
         
     except Exception as e:
         logger.error(f"Error processing sequence: {str(e)}")

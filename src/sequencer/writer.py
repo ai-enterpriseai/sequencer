@@ -26,7 +26,7 @@ class ResultWriter:
         
         # Write files
         for model, results in model_results.items():
-            timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M')
+            timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
             filename = f"results_{model.replace('/', '_')}_{timestamp}.md"
             filepath = self.output_dir / filename
             

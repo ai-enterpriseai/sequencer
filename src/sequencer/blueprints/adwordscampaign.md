@@ -19,7 +19,8 @@ webinar is called "Kammerwebinar: KI für Geschäftsführer von Produzenten"
 
 ## requirements 
 
-... 
+- Headline length: 30 characters max
+- Ad text length: 90 characters max 
 
 ## examples 
 
@@ -80,14 +81,10 @@ run the # routine exactly
 - write down the most important points 
 - store them in ``<memory>`` 
 
+
 ---
 
 ## create a set of keywords 
-
-### rules 
-
-- Headline length: 30 characters max
-- Ad text length: 90 characters max 
 
 ### requirements 
 
@@ -113,6 +110,7 @@ run the # routine exactly
 ## provide headlines for Google Ads 
 
 - provide 3 headlines 
+- ensure they correspond to the ## requirements
 - based on the keywords
 
 
@@ -131,6 +129,7 @@ run the # routine exactly
 - critically assess the quality of your proposal 
 - compare user intent in your texts with the # context 
 - review the texts one by one 
+- ensure they correspond to the ## requirements 
 - print the new texts 
 - store it in ``<memory><headlines>`` and ``<memory><ad texts>``
 

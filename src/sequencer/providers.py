@@ -106,8 +106,8 @@ class AnthropicProvider(LLMProvider):
                 
         return await with_retries(_generate)
 
-class TogetherProvider(LLMProvider):
-    """Together AI provider"""
+class OtherProviderOpenAILib(LLMProvider):
+    """Other Provider based on the OpenAI library"""
     
     def __init__(self, api_config: APIConfig, runner_config: RunnerConfig):
         super().__init__(api_config, runner_config)
@@ -121,7 +121,7 @@ class TogetherProvider(LLMProvider):
     async def generate(self, messages: List[Dict[str, str]]) -> str:
         async def _generate():
             try:
-                self.logger.info(f"Generating with Together AI model: {self.runner_config.model}")
+                self.logger.info(f"Generating with Other AI model: {self.runner_config.model}")
                 response = await self.client.chat.completions.create(
                     model=self.runner_config.model,
                     messages=messages,
@@ -150,12 +150,16 @@ def get_provider(settings: Settings, runner_config: RunnerConfig) -> LLMProvider
         ValueError: If model type is not supported
     """
     model = runner_config.model
-    if "gpt-4" in model or "o1-" in model:
+    if "gpt-4" in model or "o1-" or "gpt-3.5" in model:
         return OpenAIProvider(settings.openai_config, runner_config)
     elif "claude" in model:
         return AnthropicProvider(settings.anthropic_config, runner_config)
-    elif "meta-llama" in model:
-        return TogetherProvider(settings.together_config, runner_config)
+    elif "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo" in model:
+        return OtherProviderOpenAILib(settings.together_config, runner_config)
+    elif "Meta-Llama-3.1-405B-Instruct" in model:
+        return OtherProviderOpenAILib(settings.sambanova_config, runner_config)
+    elif "llama-3.3-70b" in model:
+        return OtherProviderOpenAILib(settings.cerebras_config, runner_config)
     else:
         raise ValueError(f"Unsupported model: {model}")
     

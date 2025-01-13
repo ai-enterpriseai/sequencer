@@ -1,7 +1,7 @@
 """
 Handles API configurations and settings for different LLM providers.
 """
-from typing import Dict, Optional, Literal
+from typing import Optional, Literal
 from pydantic import BaseModel, Field, SecretStr, AnyHttpUrl
 from pydantic_settings import BaseSettings
 
@@ -30,8 +30,17 @@ class RunnerConfig(BaseModel):
     model: ModelType
     temperature: float = Field(default=0.1, ge=0.0, le=1.0)
     top_p: float = Field(default=0.1, ge=0.0, le=1.0)
-    max_tokens: Optional[int] = Field(default=16384, gt=0)
+    max_tokens: Optional[int] = Field(default=None, gt=0)
     system_prompt: str = "You are a helpful assistant."
+
+    def __init__(self, **data):
+        super().__init__(**data)
+        # Set default max_tokens based on model provider
+        if self.max_tokens is None:
+            if "claude" in self.model:
+                self.max_tokens = 8192
+            else:
+                self.max_tokens = 16384
 
 class Settings(BaseSettings):
     """Global settings for the LLM runner"""

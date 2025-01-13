@@ -10,3 +10,4 @@ dist/
 wheels/
 *.egg-info
 run_activate.bat
+.env

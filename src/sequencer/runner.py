@@ -61,6 +61,7 @@ class SequenceRunner:
         try:
             runner_config = RunnerConfig(model=model)
             provider = get_provider(self.settings, runner_config)
+            self.logger.info(provider)
             
             for section in sections[1:]:
                 try:

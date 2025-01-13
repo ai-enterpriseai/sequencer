@@ -150,7 +150,7 @@ def get_provider(settings: Settings, runner_config: RunnerConfig) -> LLMProvider
         ValueError: If model type is not supported
     """
     model = runner_config.model
-    if "gpt-4" in model or "o1-" or "gpt-3.5" in model:
+    if "gpt-4" in model or "o1-" in model or "gpt-3.5" in model:
         return OpenAIProvider(settings.openai_config, runner_config)
     elif "claude" in model:
         return AnthropicProvider(settings.anthropic_config, runner_config)

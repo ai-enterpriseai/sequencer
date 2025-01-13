@@ -6,7 +6,6 @@ act as a copywriter for Google AdWords campaigns
 
 ## instructions 
 
-Simulate an application for an interactive campaign planner
 Use the specified rules for character limits  
 Strictly follow these instructions at all times. 
 # context 

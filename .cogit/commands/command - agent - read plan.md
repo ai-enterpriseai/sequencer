@@ -1,0 +1,1 @@
+Now go to the .cogit folder, read the plan-general.md and all of the related planning files. Understand which tasks have already been completed, considering the state of repository. Make a summary and present a clear plan of action. 

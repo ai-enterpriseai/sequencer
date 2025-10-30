@@ -26,7 +26,7 @@ Review the role requirements and outline your question generation plan.
 
 Then wait for the candidate information.
 
----
+[!---seq-div---!]
 
 # requirements
 
@@ -119,7 +119,7 @@ analyze the file and also generate questions that address gaps in the file compa
 
 make sure that the file content is relevant for the role description. if not the case, simply reply with "candidate irrelevant" 
 
----
+[!---seq-div---!]
 
 # verify the consistency
 
@@ -138,7 +138,7 @@ use a schema as bulletpoints:
 - mini quote file content 
 - mini quote role description
 
----
+[!---seq-div---!]
 
 
 # verify once again 
@@ -150,7 +150,7 @@ output only the list of refined questions
 avoid any comments at the beginning or the end of your message
 
 
----
+[!---seq-div---!]
 
 # assess candidate answers 
 

@@ -34,12 +34,12 @@ class ResultWriter:
                 for result in results:
                     f.write(f"# {result.title}\n\n")
                     f.write(f">> user:\n\n```\n{result.content}\n```\n\n")
-                    f.write("---\n\n")
+                    f.write("[!---seq-div---!]\n\n")
                     if result.error:
                         f.write(f"error: {result.error}\n\n")
                     else:
                         f.write(f">> ai:\n\n{result.response}\n\n")
-                    f.write("---\n\n")
+                    f.write("[!---seq-div---!]\n\n")
 
 def write_results(results: List[RunResult], output_dir: str | Path = "results") -> None:
     """Write results to markdown files"""

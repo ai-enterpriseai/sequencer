@@ -108,7 +108,7 @@ define @evaluator (
 </routine> 
 
 
----
+[!---seq-div---!]
 
 # analyze the requirements 
 
@@ -204,7 +204,7 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
 
 </examples>
 
----
+[!---seq-div---!]
 
 # review the new methods and functions
 
@@ -213,7 +213,7 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
 - review the new methods and functions in great detail
 - propose changes and adaptations if necessary 
 
----
+[!---seq-div---!]
 
 # review proposed changes 
 
@@ -222,7 +222,7 @@ Include key themes, content goals, target platforms, tone of voice, etc."""
 - review proposals by @discriminator
 - critically consider them and implement what is necessary 
 
----
+[!---seq-div---!]
 
 # evaluate the results and make a decision 
 

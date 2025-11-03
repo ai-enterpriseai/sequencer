@@ -1,13 +1,31 @@
 # Python-generated files
 __pycache__/
 *.py[oc]
-.obsidian/
+
+# Virtual environments
 .venv/
+venv/
+
+# IDE and editors
+.obsidian/
+.vscode/
+.idea/
+
+# Project specific
 kit/
 results/
+attachments/
+
+# Build artifacts
 build/
 dist/
 wheels/
 *.egg-info
+
+# Logs
+*.log
+logs/
+
+# Environment and scripts
 run_activate.bat
 .env

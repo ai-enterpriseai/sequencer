@@ -40,7 +40,8 @@ class SequenceReader:
         # Remove any content after --end-- marker if present
         content = re.split(r'\n--end--\s*\n', content.strip())[0]
         
-        sections = re.split(r'\n---+\n', content.strip())
+        # Split on a line that contains exactly the divider token, allowing surrounding whitespace
+        sections = re.split(r'^\s*\[!---seq-div---!\]\s*$', content.strip(), flags=re.MULTILINE)
         result = []
         
         for i, section in enumerate(sections, 1):

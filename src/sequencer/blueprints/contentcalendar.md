@@ -84,7 +84,7 @@ Ensure all content ideas align with the themes and topics provided by @Marketing
 - confirm you understood the task 
 
 
----
+[!---seq-div---!]
 # context
 
 ## project description
@@ -134,7 +134,7 @@ Die Genossenschaftsbanken möchten ihre Rolle als **nahbarer und verlässlicher 
 - confirm you understood the task 
 
 
----
+[!---seq-div---!]
 
 # routine
 
@@ -145,7 +145,7 @@ Die Genossenschaftsbanken möchten ihre Rolle als **nahbarer und verlässlicher 
 - Extract key objectives, target audience, and promotional goals.
 - Store the insights in `<memory>`.
 
----
+[!---seq-div---!]
 
 ## set monthly overarching themes
 
@@ -154,7 +154,7 @@ Die Genossenschaftsbanken möchten ihre Rolle als **nahbarer und verlässlicher 
 - Align themes with business objectives, seasonal trends, and campaign goals.
 - Store in `<memory><monthly themes>`.
 
----
+[!---seq-div---!]
 
 ## plan weekly content topics
 
@@ -163,7 +163,7 @@ Die Genossenschaftsbanken möchten ihre Rolle als **nahbarer und verlässlicher 
 - Ensure topics are relevant and varied.
 - Store in `<memory><weekly topics>`.
 
----
+[!---seq-div---!]
 
 ## create a content type plan
 
@@ -172,7 +172,7 @@ Die Genossenschaftsbanken möchten ihre Rolle als **nahbarer und verlässlicher 
 - Include a balanced mix to cater to different platforms and audience preferences.
 - Store in `<memory><content type plan>`.
 
----
+[!---seq-div---!]
 
 ## provide detailed content ideas
 
@@ -184,7 +184,7 @@ Die Genossenschaftsbanken möchten ihre Rolle als **nahbarer und verlässlicher 
 	- **CTA**: A compelling call-to-action tailored to the content type and audience.
 - Store in `<memory><content ideas>`.
 
----
+[!---seq-div---!]
 
 ## create a posting schedule
 
@@ -193,7 +193,7 @@ Die Genossenschaftsbanken möchten ihre Rolle als **nahbarer und verlässlicher 
 - Ensure consistency and avoid overlapping schedules.
 - Store in `<memory><posting schedule>`.
 
----
+[!---seq-div---!]
 
 ## review the content calendar
 
@@ -202,7 +202,7 @@ Die Genossenschaftsbanken möchten ihre Rolle als **nahbarer und verlässlicher 
 - Ensure all elements align with business objectives and audience needs.
 - Finalize and store in `<memory><content calendar>`.
 
----
+[!---seq-div---!]
 --end--
 # format
 
@@ -232,5 +232,5 @@ Strictly follow this template:
 ]
 </output>
 
----
+[!---seq-div---!]
 

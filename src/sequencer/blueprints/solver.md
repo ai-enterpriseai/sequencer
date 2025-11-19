@@ -97,7 +97,7 @@ def load_directory_filtered(directory: str) -> List[Document]:
 
 </error>
 
----
+[!---seq-div---!]
 
 # review the code
 
@@ -106,7 +106,7 @@ def load_directory_filtered(directory: str) -> List[Document]:
 - review the code in great detail
 - propose changes and adaptations if necessary 
 
----
+[!---seq-div---!]
 
 # review proposed changes 
 

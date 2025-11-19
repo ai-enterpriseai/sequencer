@@ -68,7 +68,7 @@ KI:
 
 
 
----
+[!---seq-div---!]
 
 # routine 
 
@@ -81,7 +81,7 @@ run the # routine exactly
 - store them in ``<memory>`` 
 
 
----
+[!---seq-div---!]
 
 ## create a set of keywords 
 
@@ -93,7 +93,7 @@ run the # routine exactly
 	- >> cogit pattern @theory of mind ?what does user want, really 
 
 
----
+[!---seq-div---!]
 
 ## review the keywords 
 
@@ -104,7 +104,7 @@ run the # routine exactly
 - store it in ``<memory><keywords>``
 
 
----
+[!---seq-div---!]
 
 ## provide headlines for Google Ads 
 
@@ -113,7 +113,7 @@ run the # routine exactly
 - based on the keywords
 
 
----
+[!---seq-div---!]
 
 ## provide ad texts for Google Ads 
 
@@ -121,7 +121,7 @@ run the # routine exactly
 - based on the keywords
 
 
----
+[!---seq-div---!]
 
 ## review the headlines and ad texts 
 
@@ -133,14 +133,14 @@ run the # routine exactly
 - store it in ``<memory><headlines>`` and ``<memory><ad texts>``
 
 
----
+[!---seq-div---!]
 
 ## create an image description 
 
 - generate an image description based on each pair of ``<headline>`` and ``<ad text>``
 
 
----
+[!---seq-div---!]
 
 ## create an image prompt 
 
@@ -148,7 +148,7 @@ run the # routine exactly
 - store in ``<memory><image prompts>``
 
 
----
+[!---seq-div---!]
 
 # format 
 

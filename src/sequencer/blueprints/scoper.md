@@ -24,7 +24,7 @@ First message:
 Review this text and outline a quick plan of action. Then wait for the requirements document.
 
 
----
+[!---seq-div---!]
 
 # requirements 
 
@@ -38,7 +38,7 @@ Review this text and outline a quick plan of action. Then wait for the requireme
 2. wait until scoping examples are sent 
 
 
----
+[!---seq-div---!]
 
 
 # examples of scoping documents
@@ -58,7 +58,7 @@ Review this text and outline a quick plan of action. Then wait for the requireme
 7. generate a new scoping document with all sections
 
 
----
+[!---seq-div---!]
 
 
 # validate the consistency 
@@ -71,7 +71,7 @@ between requirements and new scoping document
 - outline mistakes and improvement suggestions 
 
 
----
+[!---seq-div---!]
 
 
 # review and implement the changes 

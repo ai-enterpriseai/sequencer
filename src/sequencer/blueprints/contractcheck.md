@@ -11,7 +11,7 @@ Primary Objectives:
 3. Propose detailed improvements
 4. Generate structured documentation
 
----
+[!---seq-div---!]
 
 # data 
 ## contents
@@ -126,7 +126,7 @@ _(Arbeitnehmer)_
 - Summarize the # data 
 - Propose a plan of action 
 
---- 
+[!---seq-div---!] 
 
 # COMPLETENESS ANALYSIS
 
@@ -164,7 +164,7 @@ Output Structure:
 - Missing Elements: [List]
 - Improvement Recommendations: [Detailed Suggestions]
 
----
+[!---seq-div---!]
 
 # VERIFICATION
 
@@ -210,7 +210,7 @@ Verification Output:
 - Consistency Review: [Findings]
 - Required Adjustments: [List]
 
----
+[!---seq-div---!]
 
 # LEGAL COMPLIANCE REVIEW
 
@@ -258,7 +258,7 @@ Tasks:
 - Respond directly in the chat, do not use Canvas or Artifacts
 
 
----
+[!---seq-div---!]
 
 # VERIFICATION
 
@@ -304,7 +304,7 @@ Verification Output:
 - Consistency Review: [Findings]
 - Required Adjustments: [List]
 
----
+[!---seq-div---!]
 
 # POLICY ALIGNMENT CHECK
 
@@ -351,7 +351,7 @@ Tasks:
 - Respond directly in the chat, do not use Canvas or Artifacts
 
 
----
+[!---seq-div---!]
 
 # VERIFICATION
 
@@ -397,7 +397,7 @@ Verification Output:
 - Consistency Review: [Findings]
 - Required Adjustments: [List]
 
----
+[!---seq-div---!]
 
 # CLAUSE DISADVANTAGE ASSESSMENT
 
@@ -444,7 +444,7 @@ Tasks:
 - Respond directly in the chat, do not use Canvas or Artifacts
 
 
----
+[!---seq-div---!]
 
 # VERIFICATION
 
@@ -490,7 +490,7 @@ Verification Output:
 - Consistency Review: [Findings]
 - Required Adjustments: [List]
 
----
+[!---seq-div---!]
 
 # CLARITY AND AMBIGUITY CHECK
 
@@ -541,7 +541,7 @@ Tasks:
 - Respond directly in the chat, do not use Canvas or Artifacts
 
 
----
+[!---seq-div---!]
 
 # VERIFICATION
 
@@ -587,7 +587,7 @@ Verification Output:
 - Consistency Review: [Findings]
 - Required Adjustments: [List]
 
----
+[!---seq-div---!]
 
 # COMPREHENSIVE OUTPUT GENERATION
 
@@ -646,7 +646,7 @@ Tasks:
 - Respond directly in the chat, do not use Canvas or Artifacts
 
 
----
+[!---seq-div---!]
 
 # VERIFICATION
 
@@ -692,7 +692,7 @@ Verification Output:
 - Consistency Review: [Findings]
 - Required Adjustments: [List]
 
----
+[!---seq-div---!]
 
 # FINAL QUALITY ASSURANCE
 
@@ -883,7 +883,7 @@ This expanded structure ensures:
 - Respond directly in the chat, do not use Canvas or Artifacts
 
 
----
+[!---seq-div---!]
 
 # MASTER VERIFICATION
 

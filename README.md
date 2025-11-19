@@ -20,7 +20,7 @@ python -m sequencer sequence.md -m "claude-3-5-sonnet-20240620" "meta-llama/Meta
 ```
 
 
----
+[!---seq-div---!]
 
 # Sequencer
 
@@ -55,7 +55,7 @@ Create a markdown file with your sequence. The first section becomes the system 
 You are a helpful assistant.
 ```
 
----
+[!---seq-div---!]
 # First Prompt
 ```
 What is artificial intelligence?
